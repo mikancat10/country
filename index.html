@@ -1,223 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>わいくらサーバー - ベネルクス連合王国公式ホームページ</title>
-</head>
-<style>
-        :root {
-            --primary-color: #333;
-            --bg-color: #2e2e2e;
-            --accent-color: #262626;
-            --text-color: #c2c2c2;
-            --secondary-text: #666;
+    <title>ベネルクス連合王国 - わいくらサーバー</title>
+    <style>
+        /* 基本設定（黒・灰色・薄灰色） */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            color: #e0e0e0;
+            background-color: #000;
+            background-image: url('https://i.imgur.com/sg22crx.png'); 
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+        /* 50%透明の黒レイヤー */
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            padding: 80px 20px;
+            padding: 60px 20px 40px;
             text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        h1 {
+        header h1 {
+            margin: 0;
             font-size: 3rem;
-            margin: 10px 0;
-            letter-spacing: -1px;
+            letter-spacing: 8px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--secondary-text);
-            margin-bottom: 30px;
-        }
-
-        .btn-group {
+        /* ナビゲーション */
+        nav {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            background: rgba(30, 30, 30, 0.95);
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s;
+        .nav-item {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #888;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+            letter-spacing: 1px;
         }
 
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
+        .nav-item:hover { color: #fff; }
+        .nav-item.active {
+            color: #fff;
+            border-bottom: 3px solid #eee;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .btn-outline {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+        /* コンテンツエリア */
+        .content-wrapper {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            width: 90%;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
+        .page-content {
+            display: none;
+            background: rgba(15, 15, 15, 0.9);
+            padding: 40px;
+            border: 1px solid #333;
+            animation: fadeIn 0.5s ease;
         }
 
-        section {
-            margin-bottom: 60px;
+        .page-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            border-left: 5px solid #fff;
+            padding-left: 15px;
+            margin: 30px 0 20px;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+        h2:first-child { margin-top: 0; }
 
-        .feature-card {
+        p { line-height: 1.8; color: #bbb; }
+
+        /* 国旗 */
+        .flag-container {
+            text-align: center;
+            margin: 20px 0;
             padding: 20px;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            background: #fafafa;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
         }
+
+        .flag-image {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border: 1px solid #444;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+        }
+
+        /* 外部リンク */
+        a { color: #888; transition: 0.3s; }
+        a:hover { color: #fff; }
 
         footer {
             text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
-            color: #999;
-            border-top: 1px solid #eee;
+            padding: 30px;
+            color: #555;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
-</style>
+
+        .discord-section { margin-top: 20px; }
+    </style>
+</head>
 <body>
+
+<div class="overlay">
     <header>
-    <h1>ベネルクス連合王国</h1>
-    <div class="version-badge">1.0.0</div>
-    <p class="tagline">ベネルクス連合王国はわいくらサーバーにある国です。</p>
-    <div class="btn-group">
-        <a href="https://discord.gg/gEY565uhMQ" class="btn btn-primary">わいくらサーバーに参加</a>
-    </div>
-</header>
-<div class="container">
-    <section id="about">
-        <h2>ベネルクス連合王国について</h2>
-        <p>ベネルクス連合王国は、わいくらサーバーにある国の一つです。ベルギー、オランダの２つの国の一部が連合してできた国で、国の管理者であるmikancat10が建築やイベントの企画などを行っています。ぜひ、ベネルクス連合王国に遊びに来てください！</p>
+        <h1>BENELUX</h1>
+        <p style="color: #666; font-size: 0.9rem; letter-spacing: 2px;">United Kingdom of Benelux</p>
+    </header>
+
+    <nav>
+        <div class="nav-item active" onclick="showPage('home', this)">HOME</div>
+        <div class="nav-item" onclick="showPage('about', this)">ABOUT</div>
+        <div class="nav-item" onclick="showPage('charter', this)">LINKS</div>
+        <div class="nav-item" onclick="showPage('recruit', this)">RECRUIT</div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div id="home" class="page-content active">
+            <h2>Welcome</h2>
+            <p>ベネルクス連合王国の公式ポータルへようこそ。我々は「わいくら」サーバーにおいて、秩序と繁栄を追求する連合王国です。</p>
+            <p><strong>最新ニュース：</strong> 住民が6人を突破しました！</p>
+            
+            <h2>国家概要</h2>
+            <p>ベネルクス連合王国は、複数の地域が結集して誕生した連邦制国家です。</p>
+            <p>■ 領土：中央平原および北海沿岸<br>
+               ■ 政治：立憲共民主義、議会主義<br>
+               ■ 主要産業：貿易 (鉄)</p>
+            
             <h2>国旗</h2>
-    <img src="https://i.imgur.com/8F28vn5.png" alt="国旗" width="300">
-    <section id="features">
-        <h2>主な特徴</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>ルール</h3>
-                <p>他のプレイヤーを尊重すること</p>
-                <p>チートや不正行為をしないこと</p>
-                <p>チャットでの暴言や不快な発言をしないこと</p>
-                <p>国の管理者の指示に従うこと</p>
+            <div class="flag-container">
+                <img src="https://i.imgur.com/CNSHA5D.png" alt="国旗" class="flag-image">
             </div>
-            <div class="feature-card">
-                <h3>住民募集</h3>
-                <p>ベネルクス連合王国は、住民を募集しています！</p>
-                <p>興味のある方は、国の管理者であるmikancat10にDiscordで連絡してください。</p>
-            </div>
-            <div class="feature-card">
-                <h3>国際的な交流</h3>
-                <p>ベネルクス連合王国は、国際的な交流を重視しています。</p>
-                <p>他の国との交流を通じて、文化や技術を共有しています。</p>
+
+            <h2>最新ニュース</h2>
+            <p>・2026/03/07 - 住民が6人突破！<br>
+               ・2026/02/20 - ベネルクス連合王国、正式に誕生！</p>
+        </div>
+
+        <div id="about" class="page-content">
+            <h2>我々について</h2>
+            <p>ベネルクス連合王国は、強固な守りと規律を兼ね備えた「軍事国家」を目指しています。</p>
+            <p>
+                ■ 国防：強固な城壁と高度な防衛システムの構築<br>
+                ■ 軍事力：精鋭の兵士と最新の戦術の研究<br>
+                ■ 目標：盤石な防衛体制を築き、国民の平和を守り抜くこと
+            </p>
+        </div>
+
+        <div id="charter" class="page-content">
+            <h2>外部リンク</h2>
+            <p>王国の公式コミュニティおよび関連リンクです。</p>
+            <ul>
+                <li><a href="https://discord.gg/hw9u944Ubs" target="_blank">公式Discordサーバー</a></li>
+            </ul>
+            
+            <h2>サーバー状況</h2>
+            <div class="discord-section">
+                <iframe src="https://discord.com/widget?id=1475836971170664592&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
             </div>
         </div>
-    </section>
+
+        <div id="recruit" class="page-content">
+            <h2>国民募集</h2>
+            <p>ベネルクス連合王国は、新しい国民を積極的に募集しています。</p>
+            <p><strong>【募集要項】</strong><br>
+               ・サーバーのルールを遵守できる方<br>
+            <p style="margin-top: 30px;">
+                <span style="background: #222; padding: 10px 20px; border: 1px solid #444;">
+                    連絡先：<strong>Discord @mikancat10</strong>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 UNITED KINGDOM OF BENELUX.
+    </footer>
 </div>
-    <div class="container">
-    <section id="development">
-    <h2>国の発展状況</h2>
-    <p>現在、国の発展状況は以下の通りです。</p>
-    <ul>
-        <img src="https://i.imgur.com/sg22crx.png" alt="イメージ１" width="300">
-        <img src="https://i.imgur.com/wSAvnb9.png" alt="イメージ２" width="100">
-        <li>建築物の数: 14</li>
-        <li>イベントの数: 1</li>
-        <li>住民の数: 2</li>
-    </ul>
-    <section id="features">
-    <section id="features">
-        <h2>国際的な特徴</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>国際的な交流</h3>
-                <p>ベネルクス連合王国は、国際的な交流を重視しています。</p>
-                <p>他の国との交流を通じて、文化や技術を共有しています。</p>
-            </div>
-            <div class="feature-card">
-                <h3>イベントの開催</h3>
-                <p>ベネルクス連合王国では、定期的にイベントを開催しています。</p>
-            </div>
-            <div class="feature-card">
-                <h3>国際的な協力</h3>
-                <p>ベネルクス連合王国は、他の国と協力してプロジェクトを進めています。</p>
-                <p>例えば、他の国と協力して大規模な建築プロジェクトを行うことがあります。</p>
-            </div>
-            <div class="feature-card">
-                <h3>平和主義</h3>
-                <p>ベネルクス連合王国は、平和主義を重視しています。</p>
-                <p>他の国との紛争を避け、協力してプロジェクトを進めています。</p>
-            </div>
-            <div class="feature-card">
-                <h3>農業</h3>
-                <p>ベネルクス連合王国は、農業も重視しています。</p>
-                <p>農業を通じて、食料を安定的に供給しています。</p>
-            </div>
-            <div class="feature-card">
-                <h3>文化</h3>
-                <p>ベネルクス連合王国は、文化も重視しています。</p>
-                <p>現実での伝統的な文化を守りながら、現代的な文化も取り入れています。</p>
-            </div>
-        </div>
-    </section>
-        <section id="features">
-        <h2>合併国</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>ベルギー</h3>
-                <p>ベルギーは、ベネルクス連合王国の一部を構成する国の一つです。</p>
-                <p>現実ではベルギーは、ビールやチョコレートで有名な国です。</p>
-            </div>
-            <div class="feature-card">
-                <h3>オランダ</h3>
-                <p>オランダは、ベネルクス連合王国の一部を構成する国の一つです。</p>
-                <p>現実ではオランダは、風車やチューリップで有名な国です。</p>
-                <p>また、オランダがベルギーの一部を併合し、ベネルクス連合王国が形成されました。</p>
-            </div>
-        </div>
-    </section>
-<footer>
-    <p>Copyright &copy; 2026 mikancat10 Project. All rights reserved.</p>
-</footer>
+
+<script>
+    function showPage(pageId, element) {
+        // 全コンテンツ非表示
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.remove('active'));
+
+        // 全ナビ項目からactiveを削除
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
+
+        // 選択されたページを表示
+        document.getElementById(pageId).classList.add('active');
+        
+        // クリックされたナビ項目をactiveにする
+        element.classList.add('active');
+
+        // ページトップへ戻る
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
+
 </body>
 </html>
