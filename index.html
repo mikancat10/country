@@ -103,6 +103,13 @@
 
         h2:first-child { margin-top: 0; }
 
+        h3 {
+            color: #fff;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
         p { line-height: 1.8; color: #bbb; }
 
         /* 国旗 */
@@ -135,6 +142,57 @@
         }
 
         .discord-section { margin-top: 20px; }
+
+        /* 軍事セクション用の強調 */
+        .military-box {
+            background: rgba(40, 40, 40, 0.5);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #555;
+        }
+        /* 無限スライダーの設定 */
+.military-slider {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(20, 20, 20, 0.8);
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.slider-track {
+    display: flex;
+    /* 画像の幅(200px) + 余白(20px) = 220px。5枚分流れたらループするように設定 */
+    width: calc(220px * 10); 
+    animation: scroll 25s linear infinite;
+}
+
+.slider-track img {
+    width: 200px;
+    height: 120px;
+    margin: 0 10px;
+    object-fit: cover;
+    border: 1px solid #444;
+    filter: grayscale(30%); /* 少し軍事国家っぽく渋めに */
+    transition: 0.3s;
+}
+
+.slider-track img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* アニメーション：左へスライド */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-220px * 5)); } /* 5枚分（セットの半分）進んだらリセット */
+}
+
+/* ホバーで一時停止 */
+.military-slider:hover .slider-track {
+    animation-play-state: paused;
+}
     </style>
 </head>
 <body>
@@ -158,42 +216,68 @@
             <p>ベネルクス連合王国の公式ポータルへようこそ。我々は「わいくら」サーバーにおいて、秩序と繁栄を追求する連合王国です。</p>
             <p><strong>最新ニュース：</strong> 住民が6人を突破しました！</p>
             
-            <h2>国家概要</h2>
-            <p>ベネルクス連合王国は、複数の地域が結集して誕生した連邦制国家です。</p>
-            <p>■ 領土本土：中央平原および北海沿岸(ベルギー、オランダ、ルクセンブルク)<br>
-               ■ 政治：立憲共民主義、議会主義<br>
-               ■ 主要産業：貿易 (鉄)</p>
+            <h2>国家情報</h2>
+            <p>
+                ■ 首都：アムステルダム<br>
+                ■ 所在：ベネルクス地域、鹿児島県<br>
+                ■ イデオロギー：立憲共民主義<br>
+                ■ 主要産業：貿易 (鉄)、小麦
+            </p>
             
             <h2>国旗</h2>
             <div class="flag-container">
                 <img src="https://i.imgur.com/CNSHA5D.png" alt="国旗" class="flag-image">
             </div>
 
-            <h2>合併国</h2>
-            <p>ベネルクス連合王国(本土)は、以下の国々が合併して誕生しました。</p>
+            <div class="military-slider">
+    <div class="slider-track">
+        <img src="https://i.imgur.com/BInF9FA.png" alt="景観1">
+        <img src="https://i.imgur.com/kHHBIWn.png" alt="景観2">
+        <img src="https://i.imgur.com/sDjDnhm.png" alt="景観3">
+        <img src="https://i.imgur.com/xmL9zWk.png" alt="景観4">
+        <img src="https://i.imgur.com/829jk52.png" alt="地図">
+        
+        <img src="https://i.imgur.com/BInF9FA.png" alt="景観1">
+        <img src="https://i.imgur.com/kHHBIWn.png" alt="景観2">
+        <img src="https://i.imgur.com/sDjDnhm.png" alt="景観3">
+        <img src="https://i.imgur.com/xmL9zWk.png" alt="景観4">
+        <img src="https://i.imgur.com/829jk52.png" alt="地図">
+    </div>
+</div>
+
+            <h2>構成地域</h2>
+            <p>ベネルクス連合王国は、欧州本土とアジアの拠点が結集した連邦制国家です。</p>
             <ul>
                 <li>オランダ王国</li>
                 <li>ベルギー王国</li>
                 <li>ルクセンブルク大公国</li>
-            </ul>
-            <p>また、アジアのほうでも地域が併合されています</p>
-            <ul>
-                <li>日本国(鹿児島県)</li>
+                <li>日本国鹿児島県（アジア拠点）</li>
             </ul>
 
             <h2>最新ニュース</h2>
             <p>・2026/03/07 - 国土面積が拡大！世界面積ランキング9位にランクイン！</p>
-            <p>・2026/03/07 - 住民が6人突破！<br>
-               ・2026/02/20 - ベネルクス連合王国、正式に誕生！</p>
+            <p>・2026/03/07 - 住民が6人突破！</p>
+            <p>・2026/02/20 - ベネルクス連合王国、正式に誕生！</p>
         </div>
 
         <div id="about" class="page-content">
             <h2>我々について</h2>
             <p>ベネルクス連合王国は、強固な守りと規律を兼ね備えた「軍事国家」を目指しています。</p>
+            
+            <h3>ベネルクス国防軍</h3>
+            <div class="military-box">
+                <p>現在、当国は以下の二軍を基幹として防衛体制を構築しています。</p>
+                <ul>
+                    <li><strong>陸軍：</strong> 領土の防衛、城壁の管理、および地上戦を想定</li>
+                    <li><strong>空軍：</strong> 領空の警戒、および上空からの戦略的支援を担う。</li>
+                </ul>
+            </div>
+
+            <h3>国家目標</h3>
             <p>
-                ■ 国防：強固な城壁と高度な防衛システムの構築<br>
-                ■ 軍事力：精鋭の兵士と最新の戦術の研究<br>
-                ■ 目標：盤石な防衛体制を築き、国民の平和を守り抜くこと
+                ■ 防衛：強固な城壁と高度な防衛システムの構築<br>
+                ■ 錬度：精鋭兵の育成と最新の戦術研究<br>
+                ■ 使命：盤石な体制を築き、国民の平和を永久に守り抜く
             </p>
         </div>
 
@@ -212,9 +296,9 @@
 
         <div id="recruit" class="page-content">
             <h2>国民募集</h2>
-            <p>ベネルクス連合王国は、新しい国民を積極的に募集しています。</p>
+            <p>ベネルクス連合王国は、新しい国民を積極的に募集しています。共に軍事国家の礎を築く同志を求めています。</p>
             <p><strong>【募集要項】</strong><br>
-               ・サーバーのルールを遵守できる方<br>
+               ・サーバーのルールを遵守できる方</p>
             <p style="margin-top: 30px;">
                 <span style="background: #222; padding: 10px 20px; border: 1px solid #444;">
                     連絡先：<strong>Discord @mikancat10</strong>
@@ -224,28 +308,22 @@
     </div>
 
     <footer>
-        注意事項:現実での政治団体などには一切関係ありません(これはゲームの話です)
+        注意事項:現実での政治団体などには一切関係ありません(これはゲームの話です)<br>
         &copy; 2026 UNITED KINGDOM OF BENELUX.
     </footer>
 </div>
 
 <script>
     function showPage(pageId, element) {
-        // 全コンテンツ非表示
         const pages = document.querySelectorAll('.page-content');
         pages.forEach(page => page.classList.remove('active'));
 
-        // 全ナビ項目からactiveを削除
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => item.classList.remove('active'));
 
-        // 選択されたページを表示
         document.getElementById(pageId).classList.add('active');
-        
-        // クリックされたナビ項目をactiveにする
         element.classList.add('active');
 
-        // ページトップへ戻る
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 </script>
